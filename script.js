@@ -14,3 +14,21 @@ var ballPosition = {
 }
 // Ball speed
 var ballSpeed = { x: 5, y: 5 };
+
+var engine = (function() {
+  // Draw a circle
+  var draw =  function() {
+    ctx.beginPath();
+    ctx.arc(ballPosition.x, ballPosition.y, ballSize, 0, Math.PI*2, false);
+    ctx.fill();
+  }
+
+  return {
+    // Expose draw circle method
+    onDraw: function() {
+      draw();
+    }
+  }
+})();
+
+engine.onDraw();
