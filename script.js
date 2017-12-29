@@ -13,7 +13,7 @@ var ballPosition = {
   y: (ballSize + 5)
 }
 // Ball speed
-var ballSpeed = { x: 5, y: 5 };
+var ballSpeed = { x: 2, y: 2 };
 
 var engine = (function() {
   // Draw a circle
@@ -27,10 +27,21 @@ var engine = (function() {
   }
 
   var move = function() {
+    collision();
     ballPosition.x += ballSpeed.x;
     ballPosition.y += ballSpeed.y;
     draw();
     requestAnimationFrame(move);
+  }
+
+  var collision = function() {
+    console.log(ballPosition);
+    if (ballPosition.y >= screenSize.height - ballSize || ballPosition.y <= ballSize) {
+      ballSpeed.y *= -1;
+    }
+    if (ballPosition.x >= screenSize.width - ballSize || ballPosition.x <= ballSize) {
+      ballSpeed.x *= -1;
+    }
   }
 
   return {
@@ -40,5 +51,4 @@ var engine = (function() {
     }
   }
 })();
-
 engine.onDraw();
